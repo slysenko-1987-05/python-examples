@@ -28,3 +28,17 @@ Next-Hop              {}
 Last update           {}
 Outbound Interface    {}
 """
+d_keys = ['Prefix', 'AD/Metric', 'Next-Hop', 'Last update', 'Outbound Interface']
+ospf = dict.fromkeys(d_keys)
+list = ospf_route.split()
+list[1] = list[1].replace('[','')
+list[1] = list[1].replace(']','')
+list[3] = list[3].replace(',','')                                                                                                                                      
+list[4] = list[4].replace(',','')
+ospf['Prefix'] = list[0] 
+ospf['AD/Metric'] = list[1]
+ospf['Next-Hop'] = list[3]
+ospf['Last update'] = list[4]
+ospf['Outbound Interface'] = list[5]
+print(template.format(ospf['Prefix'], ospf['AD/Metric'], ospf['Next-Hop'], ospf['Last update'], ospf['Outbound Interface'])) 
+
