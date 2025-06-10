@@ -49,3 +49,26 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+net_temp = ''' 
+Network:
+{0:<8}  {1:<8}  {2:<8}  {3:<8}
+{0:08b}  {1:08b}  {2:08b}  {3:08b}
+
+'''     
+mask_temp = ''' 
+
+Mask: 
+/{0}
+{1:<8}  {2:<8}  {3:<8}  {4:<8}
+{1:08b}  {2:08b}  {3:08b}  {4:08b}
+''' 
+a = input('Укажите IP-сеть в формате 10.1.1.0/24: ')
+ip = a.split("/")[0].split(".") 
+ip2 = '{:08b}{:08b}{:08b}{:08b}'.format(int(ip[0]), int(ip[1]), int(ip[2]), int(ip[3]))
+mask = a.split("/")[1] 
+net = ip2[:int(mask)] + (32 - int(mask)) * "0"
+mask2 = int(mask) * "1" + (32 - int(mask)) * "0"
+print(net_temp.format(int(net[0:8],2), int(net[8:16],2), int(net[16:24],2), int(net[24:],2)))
+print(mask_temp.format(int(mask), int(mask2[0:8],2), int(mask2[8:16],2), int(mask2[16:24],2), int(mask2[24:],2)))  
+
